@@ -24,11 +24,17 @@ class MainActivity : Activity() {
 
         GlobalScope.launch(Dispatchers.Main) {
             try {
-                val match = withContext(Dispatchers.IO) {
+                val matches = withContext(Dispatchers.IO) {
                     riotAdapter.getMatchHistory("vasuleronesdevlo", "69696")
                 }
 
-                Log.d("MainActivity", "Match: $match")
+                // Iterate though the maps
+                for (match in matches.data) {
+                    val map = match.metadata.map
+                    Log.d("Maps", map)
+                }
+
+                Log.d("MainActivity", "Match: $matches")
             } catch (e: Exception) {
                 Log.e("MainActivity", "Error getting match history: ${e.message}", e)
             }

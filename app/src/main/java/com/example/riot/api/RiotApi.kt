@@ -3,7 +3,7 @@ package com.example.riot.api
 import android.accounts.Account
 import android.util.Log
 import com.example.riot.api.RiotApiService
-import com.example.riot.data.Match
+import com.example.riot.data.MatchResponse
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -29,7 +29,7 @@ class RiotApi() {
         apiService = retrofit.create(RiotApiService::class.java)
     }
 
-    suspend fun getMatchHistoryByNameAndTag(gameName: String, tagLine: String): Match {
+    suspend fun getMatchHistoryByNameAndTag(gameName: String, tagLine: String): MatchResponse {
         return apiService.getMatchHistoryByNameAndTag(gameName, tagLine)
     }
 }
