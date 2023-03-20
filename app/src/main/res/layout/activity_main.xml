@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FF2121"
     android:padding="@dimen/box_inset_layout_padding"
     tools:context=".ui.MainActivity"
     tools:deviceIds="wear">
@@ -11,9 +12,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="horizontal"
         android:padding="@dimen/inner_frame_layout_padding"
-        app:layout_boxedEdges="all"
-        android:orientation="horizontal">
+        app:layout_boxedEdges="all">
 
         <!--Search view for filtering list view-->
         <SearchView
