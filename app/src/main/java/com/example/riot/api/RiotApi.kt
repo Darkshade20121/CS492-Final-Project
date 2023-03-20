@@ -7,30 +7,29 @@ import com.example.riot.data.Match
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RiotApi(private val apiKey: String = "RGAPI-d27e6c1d-cb9b-42c3-847b-0ec34762334b") {
+// This api to find the different paths to use since riot has like 300 different requests.
+//https://docs.henrikdev.xyz/valorant.html
+//https://api.henrikdev.xyz/valorant/v3/matches/na/Vasuleronesdevlo/69696
+
+//https://api.henrikdev.xyz
+
+// Get Riot PUUID using Name and Tag
+///riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}
+// Take PUID and get match history
+class RiotApi() {
 
     val apiService: RiotApiService
 
     init {
         val retrofit = Retrofit.Builder()
-        ///riot/account/v1/accounts/by-riot-id/vasuleronesdevlo/69696?api_key=RGAPI-d27e6c1d-cb9b-42c3-847b-0ec34762334b
-            .baseUrl("https://na1.api.riotgames.com")
+            .baseUrl("https://api.henrikdev.xyz")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         apiService = retrofit.create(RiotApiService::class.java)
     }
 
-//    suspend fun getMatchIdsByPuuid(puuid: String, start: Int, count: Int): List<String> {
-//        return apiService.getMatchIdsByPuuid(puuid, start, count, apiKey)
-//    }
-//
-//    suspend fun getMatchDetailsByMatchId(matchId: String): Match {
-//        return apiService.getMatchDetailsByMatchId(matchId, apiKey)
-//    }
-
-    suspend fun getAccountByRiotId(gameName: String, tagLine: String): Account {
-        Log.d("Here 1", "Here 1")
-        return apiService.getAccountByRiotId(gameName, tagLine, apiKey)
+    suspend fun getMatchHistoryByNameAndTag(gameName: String, tagLine: String): Match {
+        return apiService.getMatchHistoryByNameAndTag(gameName, tagLine)
     }
 }

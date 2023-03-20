@@ -19,15 +19,19 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        riotApi = RiotApi(apiKey = "RGAPI-d27e6c1d-cb9b-42c3-847b-0ec34762334b")
+        riotApi = RiotApi()
         riotAdapter = RiotAdapter(riotApi)
 
         GlobalScope.launch(Dispatchers.Main) {
-            val account = withContext(Dispatchers.IO) {
-                riotAdapter.getAccount("vasuleronesdevlo", "69696")
-            }
+            try {
+                val match = withContext(Dispatchers.IO) {
+                    riotAdapter.getMatchHistory("vasuleronesdevlo", "69696")
+                }
 
-            Log.d("MainActivity", "Account: $account")
+                Log.d("MainActivity", "Match: $match")
+            } catch (e: Exception) {
+                Log.e("MainActivity", "Error getting match history: ${e.message}", e)
+            }
         }
     }
 }

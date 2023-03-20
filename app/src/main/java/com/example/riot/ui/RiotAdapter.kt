@@ -1,10 +1,11 @@
 package com.example.riot.ui
 
 import com.example.riot.api.RiotApi
-import android.accounts.Account
+import com.example.riot.data.Match
 
 class RiotAdapter(private val riotApi: RiotApi) {
-    suspend fun getAccount(gameName: String, tagLine: String): Account {
-        return riotApi.getAccountByRiotId(gameName, tagLine)
+    suspend fun getMatchHistory(gameName: String, tagLine: String): Match {
+        return riotApi.getMatchHistoryByNameAndTag(gameName, tagLine)
     }
+
 }
