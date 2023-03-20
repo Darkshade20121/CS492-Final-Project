@@ -8,11 +8,12 @@
     tools:context=".ui.MainActivity"
     tools:deviceIds="wear">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/inner_frame_layout_padding"
-        app:layout_boxedEdges="all">
+        app:layout_boxedEdges="all"
+        android:orientation="horizontal">
 
         <!--Search view for filtering list view-->
         <SearchView
@@ -24,19 +25,26 @@
             android:padding="4dp"
             android:queryHint="RIOT ID" />
 
-        <ListView
-            android:id="@+id/idLVProgrammingLanguages"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_below="@id/idSV" />
-
+        <ImageView
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            android:layout_centerHorizontal="true"
+            android:translationY="100dp" />
 
         <TextView
-            android:id="@+id/match_history_text_view"
+            android:id="@+id/text_view_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="#000000"/>
+            android:text="RIOT ID"
+            android:textAlignment="center"
+            android:translationY="210dp" />
 
-    </FrameLayout>
+        <ListView
+            android:id="@+id/idPlayers"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_below="@id/idSV"
+            android:translationY="200dp" />
+
+    </RelativeLayout>
 </androidx.wear.widget.BoxInsetLayout>
