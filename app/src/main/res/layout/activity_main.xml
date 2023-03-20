@@ -14,11 +14,22 @@
         android:padding="@dimen/inner_frame_layout_padding"
         app:layout_boxedEdges="all">
 
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
+        <!--Search view for filtering list view-->
+        <SearchView
+            android:id="@+id/idSV"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/hello_world" />
+            android:layout_margin="8dp"
+            android:iconifiedByDefault="false"
+            android:padding="4dp"
+            android:queryHint="RIOT ID" />
+
+        <ListView
+            android:id="@+id/idLVProgrammingLanguages"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/idSV" />
+
 
         <TextView
             android:id="@+id/match_history_text_view"
