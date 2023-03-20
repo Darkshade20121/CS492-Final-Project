@@ -8,24 +8,43 @@
     tools:context=".ui.MainActivity"
     tools:deviceIds="wear">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/inner_frame_layout_padding"
-        app:layout_boxedEdges="all">
+        app:layout_boxedEdges="all"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hello_world" />
-
-        <TextView
-            android:id="@+id/match_history_text_view"
+        <!--Search view for filtering list view-->
+        <SearchView
+            android:id="@+id/idSV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="#000000"/>
+            android:layout_margin="8dp"
+            android:iconifiedByDefault="false"
+            android:padding="4dp"
+            android:queryHint="RIOT ID" />
 
-    </FrameLayout>
+        <ImageView
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            android:layout_centerHorizontal="true"
+            android:translationY="100dp" />
+
+        <TextView
+            android:id="@+id/text_view_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RIOT ID"
+            android:textAlignment="center"
+            android:translationY="210dp" />
+
+        <ListView
+            android:id="@+id/idPlayers"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_below="@id/idSV"
+            android:translationY="200dp" />
+
+    </RelativeLayout>
 </androidx.wear.widget.BoxInsetLayout>
