@@ -129,3 +129,12 @@ data class LoadoutValue(
     val overall: Int,
     val average: Int
 )
+
+// Specifics to what we wanna display here
+data class MatchInfo(
+    val map: String,
+    val players: List<String>,
+    val kills: List<Int>,
+    val deaths: List<Int>,
+    val team: List<String>
+)

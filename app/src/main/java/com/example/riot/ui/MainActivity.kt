@@ -29,10 +29,13 @@ class MainActivity : Activity() {
                 }
 
                 // Iterate though the maps
-                for (match in matches.data) {
-                    val map = match.metadata.map
-                    Log.d("Maps", map)
-                }
+//                for (match in matches.data) {
+//                    val map = match.metadata.map
+//                    Log.d("Maps", map)
+//                }
+                Log.d("HERE", riotApi.getMatchInfo().toString())
+
+
 
                 Log.d("MainActivity", "Match: $matches")
             } catch (e: Exception) {
@@ -41,3 +44,17 @@ class MainActivity : Activity() {
         }
     }
 }
+
+// Player name
+    // Player Picture
+// Map1 - Name
+    //Players
+        // Agent
+        // KDA
+    // Win
+
+// Map2 - Name
+// Map3 - Name
+// Map4 - Name
+// Map5 - Name
+

@@ -3,7 +3,10 @@ package com.example.riot.api
 import android.accounts.Account
 import android.util.Log
 import com.example.riot.api.RiotApiService
+import com.example.riot.data.MatchData
+import com.example.riot.data.MatchInfo
 import com.example.riot.data.MatchResponse
+import com.example.riot.data.Player
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -20,6 +23,8 @@ class RiotApi() {
 
     val apiService: RiotApiService
 
+    private lateinit var matchHistory: MatchResponse
+
     init {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.henrikdev.xyz")
@@ -30,6 +35,20 @@ class RiotApi() {
     }
 
     suspend fun getMatchHistoryByNameAndTag(gameName: String, tagLine: String): MatchResponse {
-        return apiService.getMatchHistoryByNameAndTag(gameName, tagLine)
+        matchHistory = apiService.getMatchHistoryByNameAndTag(gameName, tagLine)
+        return matchHistory
     }
+
+    //
+
+    suspend fun getMatchInfo(): List<MatchInfo> {
+        return matchHistory.data.map { matchData ->
+            val players = matchData.players.all_players.map { player -> "${player.name}#${player.tag}" }
+            val kills = matchData.players.all_players.map { player -> player.stats.kills }
+            val deaths = matchData.players.all_players.map { player -> player.stats.deaths }
+            val team = matchData.players.all_players.map { player -> player.team }
+            MatchInfo(matchData.metadata.map, players, kills, deaths, team)
+        }
+    }
+
 }
