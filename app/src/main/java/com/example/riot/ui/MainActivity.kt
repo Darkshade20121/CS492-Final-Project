@@ -90,9 +90,9 @@ class MainActivity : AppCompatActivity() {
         Log.d("MainActivity", "Match clicked: $matchData")
 
         // Create an intent to launch the MatchDetailsActivity
-//        val intent = Intent(this, MatchDetailActivity::class.java)
-//        intent.putExtra("match_id", matchData.toString()) // Pass the match ID to the MatchDetailsActivity
-//        startActivity(intent)
+        val intent = Intent(this, MatchDetailActivity::class.java)
+        intent.putExtra("match_id", matchData.toString()) // Pass the match ID to the MatchDetailsActivity
+        startActivity(intent)
 
     }
 }
