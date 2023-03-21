@@ -60,7 +60,7 @@ data class SessionPlaytime(
 )
 
 data class Behavior(
-    val afk_rounds: Int,
+    val afk_rounds: Double,
     val friendly_fire: FriendlyFire,
     val rounds_in_spawn: Int
 )

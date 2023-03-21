@@ -7,5 +7,4 @@ class RiotAdapter(private val riotApi: RiotApi) {
     suspend fun getMatchHistory(gameName: String, tagLine: String): MatchResponse {
         return riotApi.getMatchHistoryByNameAndTag(gameName, tagLine)
     }
-
 }

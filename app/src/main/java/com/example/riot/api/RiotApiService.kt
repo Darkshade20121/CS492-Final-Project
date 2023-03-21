@@ -10,6 +10,5 @@ interface RiotApiService {
         @Path("gameName") gameName: String,
         @Path("tagLine") tagLine: String,
     ): MatchResponse
-
 }
 

@@ -5,6 +5,7 @@ plugins {
 
 android {
     namespace 'com.example.riot'
+
     compileSdk 33
 
     defaultConfig {
@@ -24,6 +25,10 @@ android {
     }
     buildFeatures {
         viewBinding true
+    }
+
+    dataBinding {
+        enabled = true
     }
 }
 
