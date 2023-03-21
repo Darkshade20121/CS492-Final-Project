@@ -66,10 +66,12 @@ class MainActivity : AppCompatActivity() {
 
                 GlobalScope.launch(Dispatchers.Main) {
                     try {
+
                         val matches = withContext(Dispatchers.IO) {
                             //riotAdapter.getMatchHistory(searchQuery.split("#")[0], searchQuery.split("#")[1])
-                            viewModel.updateMatchList(searchQuery.split("#")[0], searchQuery.split("#")[1])
+                             viewModel.updateMatchList(searchQuery.split("#")[0], searchQuery.split("#")[1])
                         }
+
                         // TODO: display the match history data in the UI
                         Log.d("MainActivity", "Match history: $matches")
                     } catch (e: Exception) {

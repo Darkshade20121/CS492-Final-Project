@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -54,7 +55,9 @@ class MatchDetailActivity : AppCompatActivity() {
             // Set the list of players
             val recyclerView: RecyclerView = findViewById(R.id.tv_match_players)
             recyclerView.layoutManager = LinearLayoutManager(this)
-//            recyclerView.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, players)
+
+//            val adapter = PlayerListAdapter(players)
+//            recyclerView.adapter = adapter
 
 
         }

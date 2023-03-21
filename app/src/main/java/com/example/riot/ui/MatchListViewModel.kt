@@ -23,5 +23,4 @@ class MatchListViewModel(private val riotApi: RiotApi) : ViewModel() {
             }
         }
     }
-
 }
