@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.riot.R
 import com.example.riot.api.RiotApi
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +15,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.lifecycle.Observer
@@ -32,14 +32,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         // Set up RecyclerView and adapter
-        val recyclerView: RecyclerView = findViewById(R.id.match_list)
+        var recyclerView: RecyclerView = findViewById(R.id.match_list)
         matchListAdapter = MatchListAdapter(this::onMatchClick)
         recyclerView.adapter = matchListAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Set up ViewModel
-        val riotApi = RiotApi()
+        riotApi = RiotApi()
+        riotAdapter = RiotAdapter(riotApi)
         viewModel = MatchListViewModel(riotApi)
         viewModel.matchList.observe(this, Observer { matchList ->
             matchListAdapter.updateMatchList(matchList)
