@@ -1,8 +1,12 @@
 package com.example.riot.ui
 
 import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
+import android.widget.TextView
 import com.example.riot.R
 import com.example.riot.api.RiotApi
 import kotlinx.coroutines.Dispatchers
@@ -41,6 +45,14 @@ class MainActivity : Activity() {
             } catch (e: Exception) {
                 Log.e("MainActivity", "Error getting match history: ${e.message}", e)
             }
+        }
+
+        val riotLogoRelink = findViewById<ImageView>(R.id.riotLogoRelink)
+
+        riotLogoRelink.setOnClickListener {
+            val uri = Uri.parse("https://www.riotgames.com")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
         }
     }
 }
