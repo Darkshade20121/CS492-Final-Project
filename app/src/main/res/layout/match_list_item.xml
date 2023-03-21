@@ -8,7 +8,7 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="test"
+        android:textAppearance="?attr/textAppearanceHeadline4"
         android:padding="16dp"/>
 
 </LinearLayout>
