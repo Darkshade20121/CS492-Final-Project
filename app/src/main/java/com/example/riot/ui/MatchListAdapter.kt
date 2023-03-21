@@ -36,7 +36,7 @@ class MatchListAdapter(
         itemView: View,
         private val onClick: (MatchData) -> Unit
     ) : RecyclerView.ViewHolder(itemView) {
-        private val nameTV: TextView = itemView.findViewById(R.id.tv_name)
+        private val nameTV: TextView = itemView.findViewById(R.id.tv_match_map)
         private var currentMatch: MatchData? = null
 
         init {
