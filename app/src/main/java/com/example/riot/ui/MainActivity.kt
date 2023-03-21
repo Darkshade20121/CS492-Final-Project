@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import android.widget.SearchView
 import android.widget.TextView
 import com.example.riot.R
 import com.example.riot.api.RiotApi
@@ -26,29 +27,39 @@ class MainActivity : Activity() {
         riotApi = RiotApi()
         riotAdapter = RiotAdapter(riotApi)
 
-        GlobalScope.launch(Dispatchers.Main) {
-            try {
-                val matches = withContext(Dispatchers.IO) {
-                    riotAdapter.getMatchHistory("vasuleronesdevlo", "69696")
+        val searchView = findViewById<SearchView>(R.id.idSV)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                var searchQuery = query
+                Log.d("Search Query", searchQuery)
+                if (searchQuery == "a" || searchQuery == "A") {
+                    searchQuery = "vasuleronesdevlo#69696"
+                    Log.d("Hello", "IN HERE")
                 }
 
-                // Iterate though the maps
-//                for (match in matches.data) {
-//                    val map = match.metadata.map
-//                    Log.d("Maps", map)
-//                }
-                Log.d("HERE", riotApi.getMatchInfo().toString())
 
-
-
-                Log.d("MainActivity", "Match: $matches")
-            } catch (e: Exception) {
-                Log.e("MainActivity", "Error getting match history: ${e.message}", e)
+                GlobalScope.launch(Dispatchers.Main) {
+                    try {
+                        val matches = withContext(Dispatchers.IO) {
+                            riotAdapter.getMatchHistory(searchQuery.split("#")[0], searchQuery.split("#")[1])
+                        }
+                        // TODO: display the match history data in the UI
+                        Log.d("MainActivity", "Match history: $matches")
+                    } catch (e: Exception) {
+                        Log.e("MainActivity", "Error getting match history: ${e.message}", e)
+                    }
+                }
+                return true
             }
-        }
 
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+        })
+
+
+        // Set up the Riot logo relink
         val riotLogoRelink = findViewById<ImageView>(R.id.riotLogoRelink)
-
         riotLogoRelink.setOnClickListener {
             val uri = Uri.parse("https://www.riotgames.com")
             val intent = Intent(Intent.ACTION_VIEW, uri)
@@ -56,6 +67,7 @@ class MainActivity : Activity() {
         }
     }
 }
+
 
 // Player name
     // Player Picture
@@ -69,4 +81,25 @@ class MainActivity : Activity() {
 // Map3 - Name
 // Map4 - Name
 // Map5 - Name
+
+//GlobalScope.launch(Dispatchers.Main) {
+//    try {
+//        val matches = withContext(Dispatchers.IO) {
+//            riotAdapter.getMatchHistory("vasuleronesdevlo", "69696")
+//        }
+//
+//        // Iterate though the maps
+////                for (match in matches.data) {
+////                    val map = match.metadata.map
+////                    Log.d("Maps", map)
+////                }
+//        Log.d("HERE", riotApi.getMatchInfo().toString())
+//
+//
+//
+//        Log.d("MainActivity", "Match: $matches")
+//    } catch (e: Exception) {
+//        Log.e("MainActivity", "Error getting match history: ${e.message}", e)
+//    }
+//}
 
