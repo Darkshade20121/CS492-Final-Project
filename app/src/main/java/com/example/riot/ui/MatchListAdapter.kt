@@ -47,6 +47,27 @@ class MatchListAdapter(
         fun bind(matchRepo: MatchData) {
             currentMatch = matchRepo
             nameTV.text = matchRepo.metadata.map
+            if(nameTV.text == "Ascent"){
+                nameTV.setBackgroundResource(R.drawable.ascent)
+            } else if (nameTV.text == "Bind"){
+                nameTV.setBackgroundResource(R.drawable.bind)
+            } else if (nameTV.text == "Breeze"){
+                nameTV.setBackgroundResource(R.drawable.breeze)
+            } else if (nameTV.text == "Fracture"){
+                nameTV.setBackgroundResource(R.drawable.fracture)
+            } else if (nameTV.text == "Haven"){
+                nameTV.setBackgroundResource(R.drawable.haven)
+            } else if (nameTV.text == "Icebox"){
+                nameTV.setBackgroundResource(R.drawable.icebox)
+            } else if (nameTV.text == "Lotus"){
+                nameTV.setBackgroundResource(R.drawable.lotus)
+            } else if (nameTV.text == "Pearl"){
+                nameTV.setBackgroundResource(R.drawable.pearl)
+            } else if (nameTV.text == "Split"){
+                nameTV.setBackgroundResource(R.drawable.split)
+            }
+
+            nameTV.background.alpha = 150
         }
     }
 }

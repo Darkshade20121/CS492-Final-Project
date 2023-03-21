@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.riot.R
 import com.example.riot.api.RiotApi
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
             matchListAdapter.updateMatchList(matchList)
         })
 
+        val riotTD: TextView = findViewById(R.id.riot_id)
         val searchView = findViewById<SearchView>(R.id.idSV)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
@@ -56,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 if (searchQuery == "a" || searchQuery == "A") {
                     searchQuery = "vasuleronesdevlo#69696"
                 }
-
+                riotTD.text = searchQuery
 
                 GlobalScope.launch(Dispatchers.Main) {
                     try {

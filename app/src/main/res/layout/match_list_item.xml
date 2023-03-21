@@ -2,14 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#000000"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_match_map"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/icebox"
+        android:padding="38dp"
+        android:textAlignment="center"
         android:textAppearance="?attr/textAppearanceHeadline4"
-        android:textSize="24sp" />
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
 </LinearLayout>
