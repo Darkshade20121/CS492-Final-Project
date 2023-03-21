@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity() {
             matchListAdapter.updateMatchList(matchList)
         })
 
+        val profilePic: ImageView = findViewById(R.id.pfp)
         val riotTD: TextView = findViewById(R.id.riot_id)
         val searchView = findViewById<SearchView>(R.id.idSV)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -59,6 +61,8 @@ class MainActivity : AppCompatActivity() {
                     searchQuery = "vasuleronesdevlo#69696"
                 }
                 riotTD.text = searchQuery
+                profilePic.visibility = View.VISIBLE
+
 
                 GlobalScope.launch(Dispatchers.Main) {
                     try {

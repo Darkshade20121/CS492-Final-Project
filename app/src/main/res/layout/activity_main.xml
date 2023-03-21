@@ -26,11 +26,13 @@
             android:queryHint="RIOT ID" />
 
         <ImageView
+            android:id="@+id/pfp"
             android:layout_width="105dp"
             android:layout_height="105dp"
             android:layout_centerHorizontal="true"
-            android:translationY="100dp"
-            android:src="@mipmap/riot_games_icon_round" />/>
+            android:src="@drawable/user"
+            android:translationY="80dp"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/riot_id"
