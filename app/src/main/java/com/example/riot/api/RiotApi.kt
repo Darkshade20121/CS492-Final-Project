@@ -39,8 +39,6 @@ class RiotApi() {
         return matchHistory
     }
 
-    //
-
     suspend fun getMatchInfo(): List<MatchInfo> {
         return matchHistory.data.map { matchData ->
             val players = matchData.players.all_players.map { player -> "${player.name}#${player.tag}" }

@@ -54,14 +54,14 @@ class MainActivity : AppCompatActivity() {
                 Log.d("Search Query", searchQuery)
                 if (searchQuery == "a" || searchQuery == "A") {
                     searchQuery = "vasuleronesdevlo#69696"
-                    Log.d("Hello", "IN HERE")
                 }
 
 
                 GlobalScope.launch(Dispatchers.Main) {
                     try {
                         val matches = withContext(Dispatchers.IO) {
-                            riotAdapter.getMatchHistory(searchQuery.split("#")[0], searchQuery.split("#")[1])
+                            //riotAdapter.getMatchHistory(searchQuery.split("#")[0], searchQuery.split("#")[1])
+                            viewModel.updateMatchList(searchQuery.split("#")[0], searchQuery.split("#")[1])
                         }
                         // TODO: display the match history data in the UI
                         Log.d("MainActivity", "Match history: $matches")
