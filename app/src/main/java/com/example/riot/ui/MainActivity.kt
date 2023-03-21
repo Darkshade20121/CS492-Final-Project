@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.lifecycle.Observer
 import com.example.riot.data.MatchData
+import java.io.Serializable
 
 class MainActivity : AppCompatActivity() {
 
@@ -91,7 +92,7 @@ class MainActivity : AppCompatActivity() {
 
         // Create an intent to launch the MatchDetailsActivity
         val intent = Intent(this, MatchDetailActivity::class.java)
-        intent.putExtra("match_id", matchData.toString()) // Pass the match ID to the MatchDetailsActivity
+        intent.putExtra(EXTRA_MATCH, matchData as Serializable)
         startActivity(intent)
 
     }

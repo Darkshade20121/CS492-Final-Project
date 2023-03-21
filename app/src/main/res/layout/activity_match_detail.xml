@@ -9,37 +9,39 @@
     tools:context=".ui.MatchDetailActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="8dp"
+        app:layout_anchorGravity="center">
 
         <TextView
             android:id="@+id/tv_match_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceHeadline3"
-            android:layout_marginBottom="4dp" />
+            android:layout_marginBottom="4dp"
+            android:textAppearance="?attr/textAppearanceHeadline3" />
 
         <TextView
             android:id="@+id/tv_match_kills"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceHeadline4"
-            android:drawablePadding="8dp" />
+            android:drawablePadding="8dp"
+            android:textAppearance="?attr/textAppearanceHeadline4" />
 
         <TextView
             android:id="@+id/tv_match_deaths"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceHeadline4"
-            android:drawablePadding="8dp" />
+            android:drawablePadding="8dp"
+            android:textAppearance="?attr/textAppearanceHeadline4" />
 
-        <ListView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tv_match_players"
-            android:layout_width="wrap_content"
+            android:layout_width="352dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceBody1"/>
+            android:textAppearance="?attr/textAppearanceBody1" />
 
     </LinearLayout>
 
