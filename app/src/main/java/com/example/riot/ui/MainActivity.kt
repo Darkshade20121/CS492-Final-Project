@@ -98,7 +98,8 @@ class MainActivity : AppCompatActivity() {
             var searchQuery = searchQuery
             Log.d("Search Query", searchQuery)
             if (searchQuery == "a" || searchQuery == "A") {
-                searchQuery = "vasuleronesdevlo#69696"
+//                searchQuery = "vasuleronesdevlo#69696"
+                searchQuery = "keneral genobi#00000"
             }
             riotTD.text = searchQuery
 
@@ -129,7 +130,8 @@ class MainActivity : AppCompatActivity() {
                 var searchQuery = query
                 Log.d("Search Query", searchQuery)
                 if (searchQuery == "a" || searchQuery == "A") {
-                    searchQuery = "vasuleronesdevlo#69696"
+                    //searchQuery = "vasuleronesdevlo#69696"
+                    searchQuery = "keneral genobi#00000"
                 }
                 riotTD.text = searchQuery
 //                profilePic.visibility = View.VISIBLE

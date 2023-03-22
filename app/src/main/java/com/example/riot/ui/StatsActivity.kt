@@ -29,8 +29,6 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 import com.example.riot.data.Player
 
-
-
 class StatsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,9 +80,11 @@ class StatsActivity : AppCompatActivity() {
 
             // Set player to max rank out of those 5 games
             val newTier = player.currenttier
-            if (newTier > currenttier && player.currenttier_patched != "Unrated") {
+            if (newTier > currenttier) {
                 currenttier = newTier
                 playerRank = player.currenttier_patched
+                Log.d("Player Rank", playerRank)
+                Log.d("Tier", currenttier.toString())
             }
 
             // Used to set image URL
@@ -159,7 +159,13 @@ class StatsActivity : AppCompatActivity() {
         headshotsTextView.text = String.format("%.2f", headshotsAverage)
         bodyshotsTextView.text = String.format("%.2f", bodyshotsAverage)
         legshotsTextView.text = String.format("%.2f", legshotsAverage)
-        rankTextView.text = playerRank
+
+        if(playerRank != ""){
+            rankTextView.text = playerRank
+        }else{
+            rankTextView.text = "Unrated"
+        }
+
 
     }
 
