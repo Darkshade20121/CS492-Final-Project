@@ -50,3 +50,8 @@ class RiotApi() {
     }
 
 }
+
+//Players -> All Players -> Player -> Name / Tag / Team / Rank / Damage Made / Damage Received / Character
+//Players -> Red / Blue -> Player -> Stats -> Kills / Deaths / Assists / Score
+//Teams   -> Red / Blue -> Has Won / Rounds Won / Rounds Lost
+//Rounds  -> Winning Team

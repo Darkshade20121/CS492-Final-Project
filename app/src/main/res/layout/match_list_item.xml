@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/tv_match_map"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="105dp"
         android:background="@drawable/icebox"
         android:padding="38dp"
         android:textAlignment="center"

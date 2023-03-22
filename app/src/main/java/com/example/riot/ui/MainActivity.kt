@@ -51,6 +51,9 @@ class MainActivity : AppCompatActivity() {
         })
 
         val profilePic: ImageView = findViewById(R.id.pfp)
+        val statsButton: ImageView = findViewById(R.id.statsButton)
+        val line: TextView = findViewById(R.id.line)
+        val recentlyPlayed: TextView = findViewById(R.id.recently_played)
         val riotTD: TextView = findViewById(R.id.riot_id)
         val searchView = findViewById<SearchView>(R.id.idSV)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -62,6 +65,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 riotTD.text = searchQuery
                 profilePic.visibility = View.VISIBLE
+                statsButton.visibility = View.VISIBLE
+                line.visibility = View.VISIBLE
+                recentlyPlayed.visibility = View.VISIBLE
 
 
                 GlobalScope.launch(Dispatchers.Main) {

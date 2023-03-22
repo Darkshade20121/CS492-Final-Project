@@ -39,10 +39,11 @@ class MatchDetailActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.tv_match_map).text = matchData!!.metadata.map
 
             // Set the number of kills
-            //findViewById<TextView>(R.id.tv_match_kills).text = "Kills: ${matchData!!.metadata.p}"
+
+           // findViewById<TextView>(R.id.tv_match_kills).text = "Kills: ${matchData!!.metadata.}"
 
             // Set the number of deaths
-            //findViewById<TextView>(R.id.tv_match_deaths).text = "Deaths: ${matchData!!.info.deaths}"
+           // findViewById<TextView>(R.id.tv_match_deaths).text = "Deaths: ${matchData!!.info.deaths}"
 
             // Create a list of player names and their KDA
             val players = mutableListOf<String>()
