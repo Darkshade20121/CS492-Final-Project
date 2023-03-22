@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.riot.R
 import com.example.riot.data.MatchData
+import com.example.riot.data.Player
 
 class StatsActivity : AppCompatActivity() {
 
@@ -19,17 +20,21 @@ class StatsActivity : AppCompatActivity() {
         val name = intent.getStringExtra("EXTRA_NAME")
         Log.d("MAIN NAME", name.toString())
 
-
         val matches = intent.getSerializableExtra(EXTRA_MATCH) as? List<MatchData>
-        val filteredMatches = matches?.filter { match ->
-            match.players.all_players.any { player ->
-                player.name.toString() == name.toString()
+        val filteredPlayers = mutableListOf<Player>()
+
+        matches?.forEach { match ->
+            match.players.all_players.forEach { player ->
+                if (name != null) {
+                    if (player.name.lowercase() == name.lowercase()) {
+                        filteredPlayers.add(player)
+                    }
+                }
             }
-        } ?: emptyList()
+        }
 
-        
+        Log.d("FILTERED PLAYERS", filteredPlayers.toString())
 
-        Log.d("FILTERED", filteredMatches.toString())
 
 
 //        val recyclerView: RecyclerView = findViewById(R.id.stats_list)
