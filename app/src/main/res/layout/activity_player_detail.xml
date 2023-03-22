@@ -111,7 +111,7 @@
             android:id="@+id/player_rank"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Player Rank"
+            android:text="Unrated"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="25sp"
@@ -145,7 +145,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Average Headshots"
+            android:text="Average Headshots %"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
@@ -168,7 +168,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Average Bodyshots"
+            android:text="Average Bodyshots %"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
@@ -191,7 +191,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Average Legshots"
+            android:text="Average Legshots %"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="14sp"

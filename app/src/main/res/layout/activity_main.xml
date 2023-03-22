@@ -37,14 +37,35 @@
             android:translationY="80dp"
             android:visibility="gone" />
 
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/loading_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:translationX="180dp"
+            android:translationY="120dp"
+            android:visibility="invisible" />
+
         <TextView
             android:id="@+id/riot_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:text="Search for a User Name#Tag"
             android:textSize="20sp"
             android:textStyle="bold"
             android:translationY="200dp" />
+        <TextView
+            android:id="@+id/errorUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="User does not exist! Try again."
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:translationY="200dp"
+            android:visibility="invisible"/>
 
         <TextView
             android:id="@+id/line"

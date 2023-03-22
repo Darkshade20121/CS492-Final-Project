@@ -19,9 +19,9 @@ class MatchListViewModel(private val riotApi: RiotApi) : ViewModel() {
                 val matches = riotApi.getMatchHistoryByNameAndTag(gameName, tagLine).data
                 _matchList.postValue(matches)
             } catch (e: Exception) {
+                // Error Handle Here!!!!!!!!
                 Log.e("MatchListViewModel", "Error getting match history: ${e.message}", e)
             }
         }
     }
-
 }

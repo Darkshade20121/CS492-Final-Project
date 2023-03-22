@@ -13,9 +13,12 @@ import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.content.ContentValues
+import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.widget.ImageView
 import android.widget.RelativeLayout
+import android.widget.SearchView
 import android.widget.TextView
 
 import java.io.File
@@ -33,6 +36,14 @@ class StatsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player_detail)
+
+        // Find the back button view by its ID
+        val backButton = findViewById<View>(R.id.matchButton)
+
+        // Set an OnClickListener to the button to finish the activity when it's clicked
+        backButton.setOnClickListener {
+            finish()
+        }
 
         val name = intent.getStringExtra("EXTRA_NAME")
         Log.d("MAIN NAME", name.toString())
@@ -59,6 +70,7 @@ class StatsActivity : AppCompatActivity() {
         var totalLegshots = 0.0F
         var playerRank = ""
         var imageUrl = ""
+        var currenttier = 0
 
         filteredPlayers.forEach { player ->
             totalKills += player.stats.kills
@@ -67,9 +79,15 @@ class StatsActivity : AppCompatActivity() {
             totalHeadshots += player.stats.headshots
             totalBodyshots += player.stats.bodyshots
             totalLegshots += player.stats.legshots
-            if(player.currenttier_patched != "Unrated"){
+
+            // Set player to max rank out of those 5 games
+            val newTier = player.currenttier
+            if (newTier > currenttier && player.currenttier_patched != "Unrated") {
+                currenttier = newTier
                 playerRank = player.currenttier_patched
             }
+
+            // Used to set image URL
             imageUrl = player.assets.card.small
         }
 
@@ -78,14 +96,46 @@ class StatsActivity : AppCompatActivity() {
         val bodyshotsAverage = (totalBodyshots / numPlayers).toDouble()
         val legshotsAverage = (totalLegshots / numPlayers).toDouble()
 
+        val userName = findViewById<TextView>(R.id.riot_id)
         val cardView = findViewById<RelativeLayout>(R.id.player_layout)
         val captureButton = findViewById<ImageView>(R.id.saveButton)
+        val idSV = findViewById<SearchView>(R.id.idSV)
+        val riotLogoRelink = findViewById<ImageView>(R.id.riotLogoRelink)
+
+        cardView.setBackgroundColor(Color.parseColor("#FF2121"))
+
+        userName.text = name
+
         captureButton.setOnClickListener {
+            backButton.visibility = View.INVISIBLE
+            captureButton.visibility = View.INVISIBLE
+            idSV.visibility = View.INVISIBLE
+            riotLogoRelink.visibility = View.INVISIBLE
+
             val bitmap = getScreenShotFromView(cardView)
             if (bitmap != null) {
                 saveMediaToStorage(bitmap)
             }
+
+            backButton.visibility = View.VISIBLE
+            captureButton.visibility = View.VISIBLE
+            idSV.visibility = View.VISIBLE
+            riotLogoRelink.visibility = View.VISIBLE
         }
+
+        val searchView = findViewById<SearchView>(R.id.idSV)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                val intent = Intent(this@StatsActivity, MainActivity::class.java)
+                intent.putExtra("QUERY_STRING", query)
+                startActivity(intent)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+        })
         Log.d("FILTERED PLAYERS", filteredPlayers.toString())
 
 
@@ -110,9 +160,6 @@ class StatsActivity : AppCompatActivity() {
         bodyshotsTextView.text = String.format("%.2f", bodyshotsAverage)
         legshotsTextView.text = String.format("%.2f", legshotsAverage)
         rankTextView.text = playerRank
-
-
-
 
     }
 
