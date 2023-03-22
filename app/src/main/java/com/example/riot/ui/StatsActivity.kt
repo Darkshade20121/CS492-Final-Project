@@ -1,35 +1,40 @@
 package com.example.riot.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.riot.R
 import com.example.riot.data.MatchData
-import java.io.Serializable
 
 class StatsActivity : AppCompatActivity() {
-    private var matchData: MatchData? = null
+
+    private lateinit var statsAdapter: StatsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player_detail)
 
-
-        if (intent != null && intent.hasExtra(EXTRA_MATCH)) {
-            val name = intent.getStringExtra("EXTRA_NAME")
-            Log.d("MAIN NAME", name.toString())
+        val name = intent.getStringExtra("EXTRA_NAME")
+        Log.d("MAIN NAME", name.toString())
 
 
+        val matches = intent.getSerializableExtra(EXTRA_MATCH) as? List<MatchData>
+        val filteredMatches = matches?.filter { match ->
+            match.players.all_players.any { player ->
+                player.name.toString() == name.toString()
+            }
+        } ?: emptyList()
 
-        }else{
-            Log.d("INTENT IS NULL BUT:", "BUT:")
-            val name = intent.getStringExtra("EXTRA_NAME")
-            Log.d("MAIN NAME", name.toString())
+        
 
-        }
+        Log.d("FILTERED", filteredMatches.toString())
+
+
+//        val recyclerView: RecyclerView = findViewById(R.id.stats_list)
+//        statsAdapter = StatsAdapter(filteredMatches)
+//        recyclerView.adapter = statsAdapter
+//        recyclerView.layoutManager = LinearLayoutManager(this)
     }
 }
