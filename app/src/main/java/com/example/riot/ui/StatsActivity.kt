@@ -17,6 +17,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.SearchView
 import android.widget.TextView

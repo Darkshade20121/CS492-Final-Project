@@ -13,15 +13,9 @@ class MatchListViewModel(private val riotApi: RiotApi) : ViewModel() {
     private val _matchList = MutableLiveData<List<MatchData>>(emptyList())
     val matchList: LiveData<List<MatchData>> = _matchList
 
-    fun updateMatchList(gameName: String, tagLine: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val matches = riotApi.getMatchHistoryByNameAndTag(gameName, tagLine).data
-                _matchList.postValue(matches)
-            } catch (e: Exception) {
-                // Error Handle Here!!!!!!!!
-                Log.e("MatchListViewModel", "Error getting match history: ${e.message}", e)
-            }
-        }
+    suspend fun updateMatchList(gameName: String, tagLine: String) {
+        val matches = riotApi.getMatchHistoryByNameAndTag(gameName, tagLine).data
+        _matchList.postValue(matches)
+
     }
 }

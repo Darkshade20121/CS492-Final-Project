@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -90,8 +91,7 @@ class MainActivity : AppCompatActivity() {
         // If done from profile page will also work and set back to home page
         val searchQuery = intent.getStringExtra("QUERY_STRING")
         if (searchQuery != null) {
-            riotTD.visibility = View.VISIBLE
-            error.visibility = View.INVISIBLE
+            loadingIndicator.visibility = View.VISIBLE
 
             searchView.clearFocus()
             searchView.setQuery(searchQuery, true)
@@ -113,8 +113,12 @@ class MainActivity : AppCompatActivity() {
                     val matches = withContext(Dispatchers.IO) {
                         viewModel.updateMatchList(searchQuery!!.split("#")[0], searchQuery!!.split("#")[1])
                     }
+                    error.visibility = View.INVISIBLE
+
                     Log.d("MainActivity", "Match history: $matches")
                 } catch (e: Exception) {
+                    loadingIndicator.visibility = View.INVISIBLE
+                    riotTD.text = "Error finding user."
                     Log.e("MainActivity", "Error getting match history: ${e.message}", e)
                 }
             }
@@ -130,7 +134,7 @@ class MainActivity : AppCompatActivity() {
                 var searchQuery = query
                 Log.d("Search Query", searchQuery)
                 if (searchQuery == "a" || searchQuery == "A") {
-                    //searchQuery = "vasuleronesdevlo#69696"
+                    searchQuery = "vasuleronesdevlo#69696"
                     searchQuery = "keneral genobi#00000"
                 }
                 riotTD.text = searchQuery
@@ -147,6 +151,9 @@ class MainActivity : AppCompatActivity() {
                         }
                         Log.d("MainActivity", "Match history: $matches")
                     } catch (e: Exception) {
+                        // Turn Loading off and Display error Message
+                        loadingIndicator.visibility = View.INVISIBLE
+                        riotTD.text = "Error finding user."
                         Log.e("MainActivity", "Error getting match history: ${e.message}", e)
                     }
                 }
