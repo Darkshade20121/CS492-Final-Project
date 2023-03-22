@@ -48,12 +48,14 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = matchListAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+
         // Set up ViewModel
         riotApi = RiotApi()
         riotAdapter = RiotAdapter(riotApi)
         viewModel = MatchListViewModel(riotApi)
         viewModel.matchList.observe(this, Observer { matchList ->
             matchListAdapter.updateMatchList(matchList)
+            passedMatches = matchList
         })
 
         val profilePic: ImageView = findViewById(R.id.pfp)
@@ -97,7 +99,7 @@ class MainActivity : AppCompatActivity() {
         statsButton.setOnClickListener {
             val intent = Intent(this, StatsActivity::class.java)
             intent.putExtra("EXTRA_NAME", nameMain)
-            intent.putExtra(EXTRA_MATCH, matchData as Serializable)
+            intent.putExtra(EXTRA_MATCH, passedMatches as Serializable)
             startActivity(intent)
         }
 
