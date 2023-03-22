@@ -151,7 +151,6 @@ data class MatchInfo(
     val players: List<String>,
     val kills: List<Int>,
     val deaths: List<Int>,
-    val team: List<String>,
-    val teams: Teams
+    val team: List<String>
 ) : Serializable
 

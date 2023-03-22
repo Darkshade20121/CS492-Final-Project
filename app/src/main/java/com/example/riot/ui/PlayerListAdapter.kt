@@ -1,5 +1,7 @@
 package com.example.riot.ui
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +18,9 @@ class PlayerListAdapter(private val players: List<String>, private val kills: Li
         val playerKills: TextView = itemView.findViewById(R.id.tv_player_kills)
         val playerDeaths: TextView = itemView.findViewById(R.id.tv_player_deaths)
         val playerAssists: TextView = itemView.findViewById(R.id.tv_player_assists)
-        val playerTeam: ImageView = itemView.findViewById(R.id.iv_player_team)
+
+        val playerTeam: ImageView = itemView.findViewById(R.id.tv_player_card)
+
         val blueScore: TextView = itemView.findViewById(R.id.blue_score)
         val redScore: TextView = itemView.findViewById(R.id.red_score)
     }
@@ -32,6 +36,12 @@ class PlayerListAdapter(private val players: List<String>, private val kills: Li
         holder.playerKills.text = "Kills: ${kills[position]}"
         holder.playerDeaths.text = "Deaths: ${deaths[position]}"
         holder.playerAssists.text = "Assists: ${assists[position]}"
+
+        if(teamColor[position] == "Red" || teamColor[position] == "red"){
+            holder.playerTeam.background = ColorDrawable(Color.RED)
+        }else if(teamColor[position] == "Blue" || teamColor[position] == "blue"){
+            holder.playerTeam.background = ColorDrawable(Color.BLUE)
+        }
 
         holder.blueScore.text = blueScore.toString()
         holder.redScore.text = redScore.toString()

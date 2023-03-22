@@ -52,6 +52,8 @@ class MatchDetailActivity : AppCompatActivity() {
             val kills = mutableListOf<Int>()
             val deaths = mutableListOf<Int>()
             val assists = mutableListOf<Int>()
+
+
             val blueScore = matchData!!.teams.blue.rounds_won
             val redScore = matchData!!.teams.red.rounds_won
 
