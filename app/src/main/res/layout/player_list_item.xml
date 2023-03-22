@@ -8,20 +8,22 @@
 
     <TextView
         android:id="@+id/tv_player_name"
-        android:layout_width="match_parent"
-        android:layout_height="105dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:padding="38dp"
         android:textAlignment="center"
         android:textAppearance="?attr/textAppearanceHeadline4"
         android:textColor="#FFFFFF"
-        android:textSize="24sp"
+        android:textSize="44sp"
+        android:text="HI"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_player_kills"
-        android:layout_width="match_parent"
-        android:layout_height="105dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:padding="38dp"
+        android:text="HddI"
         android:textAlignment="center"
         android:textAppearance="?attr/textAppearanceHeadline4"
         android:textColor="#FFFFFF"
@@ -30,8 +32,8 @@
 
     <TextView
         android:id="@+id/tv_player_deaths"
-        android:layout_width="match_parent"
-        android:layout_height="105dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:padding="38dp"
         android:textAlignment="center"
         android:textAppearance="?attr/textAppearanceHeadline4"
@@ -41,8 +43,8 @@
 
     <TextView
         android:id="@+id/tv_player_assists"
-        android:layout_width="match_parent"
-        android:layout_height="105dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:padding="38dp"
         android:textAlignment="center"
         android:textAppearance="?attr/textAppearanceHeadline4"
