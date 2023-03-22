@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.riot.R
@@ -19,10 +20,7 @@ class PlayerListAdapter(private val players: List<String>, private val kills: Li
         val playerDeaths: TextView = itemView.findViewById(R.id.tv_player_deaths)
         val playerAssists: TextView = itemView.findViewById(R.id.tv_player_assists)
 
-        val playerTeam: ImageView = itemView.findViewById(R.id.tv_player_card)
-
-        val blueScore: TextView = itemView.findViewById(R.id.blue_score)
-        val redScore: TextView = itemView.findViewById(R.id.red_score)
+        val playerTeam: LinearLayout = itemView.findViewById(R.id.tv_player_card)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerViewHolder {
@@ -42,19 +40,6 @@ class PlayerListAdapter(private val players: List<String>, private val kills: Li
         }else if(teamColor[position] == "Blue" || teamColor[position] == "blue"){
             holder.playerTeam.background = ColorDrawable(Color.BLUE)
         }
-
-        holder.blueScore.text = blueScore.toString()
-        holder.redScore.text = redScore.toString()
-
-
-
-
-//        val team = teamColor[position]
-//        if (team == "Blue") {
-//            holder.playerTeam.setImageResource(R.drawable.ic_blue_team)
-//        } else {
-//            holder.playerTeam.setImageResource(R.drawable.ic_red_team)
-//        }
     }
 
     override fun getItemCount() = players.size
