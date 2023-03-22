@@ -108,7 +108,6 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, MatchDetailActivity::class.java)
         intent.putExtra(EXTRA_MATCH, matchData as Serializable)
         startActivity(intent)
-
     }
 }
 

@@ -37,7 +37,18 @@ class MatchDetailActivity : AppCompatActivity() {
             Log.d("This is the intent", intent.toString())
 
             // Set the map name
+
             findViewById<TextView>(R.id.tv_match_map).text = matchData!!.metadata.map
+
+            if(matchData!!.teams.red.has_won){
+                findViewById<TextView>(R.id.win_loss).text = "Red Won"
+            }else{
+                findViewById<TextView>(R.id.win_loss).text = "Blue Won"
+            }
+
+            findViewById<TextView>(R.id.red_score).text = matchData!!.teams.red.rounds_won.toString()
+            findViewById<TextView>(R.id.blue_score).text = matchData!!.teams.blue.rounds_won.toString()
+
 
             // Set the number of kills
 
