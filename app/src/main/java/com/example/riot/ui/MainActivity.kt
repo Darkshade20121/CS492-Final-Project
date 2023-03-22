@@ -1,6 +1,5 @@
 package com.example.riot.ui
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -21,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.lifecycle.Observer
 import com.example.riot.data.MatchData
+import com.example.riot.data.Stats
 import java.io.Serializable
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +31,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var matchListAdapter: MatchListAdapter
     private lateinit var viewModel: MatchListViewModel
 
+    private lateinit var statsAdapter: StatsAdapter
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -39,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         // Set up RecyclerView and adapter
         var recyclerView: RecyclerView = findViewById(R.id.match_list)
         matchListAdapter = MatchListAdapter(this::onMatchClick)
+        statsAdapter = StatsAdapter(this::onStatsClick)
         recyclerView.adapter = matchListAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -49,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.matchList.observe(this, Observer { matchList ->
             matchListAdapter.updateMatchList(matchList)
         })
+
 
         val profilePic: ImageView = findViewById(R.id.pfp)
         val statsButton: ImageView = findViewById(R.id.statsButton)
@@ -98,14 +105,23 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
         }
-
     }
     private fun onMatchClick(matchData: MatchData) {
         // Handle click on match item
-        Log.d("MainActivity", "Match clicked: $matchData")
+        Log.d("MainActivity", "Stats clicked: $matchData")
 
         // Create an intent to launch the MatchDetailsActivity
-        val intent = Intent(this, MatchDetailActivity::class.java)
+        val intent = Intent(this, StatsActivity::class.java)
+        intent.putExtra(EXTRA_MATCH, matchData as Serializable)
+        startActivity(intent)
+    }
+
+    private fun onStatsClick(matchData: MatchData) {
+        // Handle click on match item
+        Log.d("MainActivity", "Stats clicked: $matchData")
+
+        // Create an intent to launch the MatchDetailsActivity
+        val intent = Intent(this, StatsActivity::class.java)
         intent.putExtra(EXTRA_MATCH, matchData as Serializable)
         startActivity(intent)
     }

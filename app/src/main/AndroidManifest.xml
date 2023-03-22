@@ -38,6 +38,11 @@
             android:name=".ui.MatchDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             />
+
+        <activity
+            android:name=".ui.StatsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
     </application>
 
 </manifest>
