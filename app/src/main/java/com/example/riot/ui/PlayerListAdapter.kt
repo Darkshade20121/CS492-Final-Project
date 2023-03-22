@@ -11,7 +11,8 @@ class PlayerListAdapter(private val players: List<String>) : RecyclerView.Adapte
 
     // Change the R.id.tv_match_players to the id of the TextView you want to use to display each player
     class PlayerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val playerNameTextView: TextView = itemView.findViewById(R.id.tv_match_players)
+        // Change
+        val playerNameTextView: TextView = itemView.findViewById(R.id.tv_match_map)
     }
 
     // Change the R.layout.activity_match_detail to the layout file you want to use to display each player item

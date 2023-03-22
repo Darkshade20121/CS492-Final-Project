@@ -47,6 +47,8 @@ class MatchDetailActivity : AppCompatActivity() {
 
             // Create a list of player names and their KDA
             val players = mutableListOf<String>()
+            val kills = mutableListOf<String>()
+            val deaths = mutableListOf<String>()
             for (player in matchData!!.players.all_players) {
                 players.add("${player.name} - KDA: ${player.stats.kills}/${player.stats.deaths}/${player.stats.assists}")
             }
@@ -54,8 +56,8 @@ class MatchDetailActivity : AppCompatActivity() {
             Log.d("Players In MatchDetailActivity", players.toString())
 
             // Set the list of players
-            val recyclerView: RecyclerView = findViewById(R.id.tv_match_players)
-            recyclerView.layoutManager = LinearLayoutManager(this)
+            //val recyclerView: RecyclerView = findViewById(R.id.tv_red_team_players)
+            //recyclerView.layoutManager = LinearLayoutManager(this)
 
 //            val adapter = PlayerListAdapter(players)
 //            recyclerView.adapter = adapter
