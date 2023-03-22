@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.lifecycle.Observer
 import com.example.riot.data.MatchData
-import com.example.riot.data.Stats
 import java.io.Serializable
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +32,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var statsAdapter: StatsAdapter
 
+    private var nameMain: String? = null
+    private var passedMatches: List<MatchData> = emptyList()
+
 
 
 
@@ -40,11 +42,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         // Set up RecyclerView and adapter
         var recyclerView: RecyclerView = findViewById(R.id.match_list)
         matchListAdapter = MatchListAdapter(this::onMatchClick)
-        statsAdapter = StatsAdapter(this::onStatsClick)
         recyclerView.adapter = matchListAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity() {
         viewModel.matchList.observe(this, Observer { matchList ->
             matchListAdapter.updateMatchList(matchList)
         })
-
 
         val profilePic: ImageView = findViewById(R.id.pfp)
         val statsButton: ImageView = findViewById(R.id.statsButton)
@@ -76,16 +75,12 @@ class MainActivity : AppCompatActivity() {
                 line.visibility = View.VISIBLE
                 recentlyPlayed.visibility = View.VISIBLE
 
-
                 GlobalScope.launch(Dispatchers.Main) {
+                    nameMain = searchQuery.split("#")[0]
                     try {
-
                         val matches = withContext(Dispatchers.IO) {
-                            //riotAdapter.getMatchHistory(searchQuery.split("#")[0], searchQuery.split("#")[1])
-                             viewModel.updateMatchList(searchQuery.split("#")[0], searchQuery.split("#")[1])
+                            viewModel.updateMatchList(searchQuery.split("#")[0], searchQuery.split("#")[1])
                         }
-
-                        // TODO: display the match history data in the UI
                         Log.d("MainActivity", "Match history: $matches")
                     } catch (e: Exception) {
                         Log.e("MainActivity", "Error getting match history: ${e.message}", e)
@@ -99,6 +94,13 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        statsButton.setOnClickListener {
+            val intent = Intent(this, StatsActivity::class.java)
+            intent.putExtra("EXTRA_NAME", nameMain)
+            intent.putExtra(EXTRA_MATCH, matchData as Serializable)
+            startActivity(intent)
+        }
+
         val riotLogoRelink = findViewById<ImageView>(R.id.riotLogoRelink)
         riotLogoRelink.setOnClickListener {
             val uri = Uri.parse("https://www.riotgames.com")
@@ -106,23 +108,24 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
     private fun onMatchClick(matchData: MatchData) {
         // Handle click on match item
         Log.d("MainActivity", "Stats clicked: $matchData")
 
         // Create an intent to launch the MatchDetailsActivity
-        val intent = Intent(this, StatsActivity::class.java)
+        val intent = Intent(this, MatchDetailActivity::class.java)
         intent.putExtra(EXTRA_MATCH, matchData as Serializable)
         startActivity(intent)
     }
+    private fun onStatsClick(matchData: MatchData, nameMain: String) {
+        // Handle click on stats button
+        Log.d("MainActivity", "Stats clicked: $matchData, $nameMain")
 
-    private fun onStatsClick(matchData: MatchData) {
-        // Handle click on match item
-        Log.d("MainActivity", "Stats clicked: $matchData")
-
-        // Create an intent to launch the MatchDetailsActivity
+        // Create an intent to launch the StatsActivity
         val intent = Intent(this, StatsActivity::class.java)
         intent.putExtra(EXTRA_MATCH, matchData as Serializable)
+        intent.putExtra("EXTRA_NAME", nameMain)
         startActivity(intent)
     }
 }

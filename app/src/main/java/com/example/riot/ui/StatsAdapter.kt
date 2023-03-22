@@ -6,35 +6,36 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.riot.R
-import com.example.riot.data.Player
+import com.example.riot.data.MatchData
 import kotlin.reflect.KFunction1
 
-class StatsAdapter(private val players: List<Player>) : RecyclerView.Adapter<StatsAdapter.StatsViewHolder>() {
+class StatsAdapter(private val player: KFunction1<MatchData, Unit>) : RecyclerView.Adapter<StatsAdapter.PlayerViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatsViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_player_stats, parent, false)
-        return StatsViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_player_detail, parent, false)
+        return PlayerViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: StatsViewHolder, position: Int) {
-        holder.bind(players[position])
+    override fun onBindViewHolder(holder: PlayerViewHolder, position: Int) {
+        when (position) {
+//            0 -> holder.bind("Player Rank", player.rank.toString())
+//            1 -> holder.bind("Average KDA", player.kda.toString())
+//            2 -> holder.bind("Average Headshots", player.headshots.toString())
+//            3 -> holder.bind("Average Bodyshots", player.bodyshots.toString())
+//            4 -> holder.bind("Average Legshots", player.legshots.toString())
+            else -> holder.bind("", "")
+        }
     }
 
-    override fun getItemCount(): Int = players.size
+    override fun getItemCount() = 5 // number of data fields in the layout
 
-    inner class StatsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val playerName: TextView = itemView.findViewById(R.id.tv_player_name)
-        private val playerKills: TextView = itemView.findViewById(R.id.tv_player_kills)
-        private val playerDeaths: TextView = itemView.findViewById(R.id.tv_player_deaths)
-        private val playerAssists: TextView = itemView.findViewById(R.id.tv_player_assists)
+    class PlayerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val labelTextView: TextView = itemView.findViewById(R.id.player_kda)
+        private val valueTextView: TextView = itemView.findViewById(R.id.player_bodyshot)
 
-        fun bind(player: Player) {
-            playerName.text = player.name
-            playerKills.text = "Kills: ${player.stats.kills}"
-            playerDeaths.text = "Deaths: ${player.stats.deaths}"
-            playerAssists.text = "Assists: ${player.stats.assists}"
-
-            itemView.setOnClickListener { onMatchClick.invoke(player.matchData) }
+        fun bind(label: String, value: String) {
+            labelTextView.text = "label"
+            valueTextView.text = "value"
         }
     }
 }
