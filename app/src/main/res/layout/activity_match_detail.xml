@@ -2,11 +2,19 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coordinator_layout"
+    android:id="@+id/match_detail_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF2121"
+    android:background="#000000"
     tools:context=".ui.MatchDetailActivity">
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:alpha="0.5"
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/tv_match_map"
@@ -32,13 +40,13 @@
 
         <TextView
             android:id="@+id/blue_score"
-            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
+            android:text=""
             android:textAlignment="center"
             android:textAppearance="?attr/textAppearanceHeadline3"
-            android:textColor="#85D3FF"
+            android:textColor="#00A3FF"
             android:textSize="30sp"
             android:textStyle="bold"
             android:translationX="-50dp" />
@@ -48,22 +56,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
+            android:text="Victory"
             android:textAlignment="center"
             android:textAppearance="?attr/textAppearanceHeadline3"
             android:textColor="#FFFFFF"
             android:textSize="40sp"
-            android:textStyle="bold"
-            android:text="Victory" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/red_score"
-            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
+            android:text=""
             android:textAlignment="center"
             android:textAppearance="?attr/textAppearanceHeadline3"
-            android:textColor="#FFBCBC"
+            android:textColor="#FF3333"
             android:textSize="30sp"
             android:textStyle="bold"
             android:translationX="50dp" />
@@ -81,11 +89,11 @@
         android:translationY="200dp"
         app:layout_anchorGravity="center">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/tv_players"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceBody1" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tv_players"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBody1" />
 
     </LinearLayout>
 
