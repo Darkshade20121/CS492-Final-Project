@@ -81,57 +81,11 @@
         android:translationY="200dp"
         app:layout_anchorGravity="center">
 
-        <LinearLayout
-            android:id="@+id/blue_team_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#0000FF"
-            android:orientation="vertical"
-            android:padding="8dp">
-
-            <TextView
-                android:id="@+id/tv_blue_team_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Blue Team"
-                android:textAlignment="center"
-                android:textAppearance="?attr/textAppearanceHeadline4"
-                android:textColor="#FFFFFF" />
-
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/tv_blue_team_players"
+                android:id="@+id/tv_players"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?attr/textAppearanceBody1" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/red_team_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#FF0000"
-            android:orientation="vertical"
-            android:padding="8dp">
-
-            <TextView
-                android:id="@+id/tv_red_team_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Red Team"
-                android:textAlignment="center"
-                android:textAppearance="?attr/textAppearanceHeadline4"
-                android:textColor="#FFFFFF" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/tv_red_team_players"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceBody1" />
-
-        </LinearLayout>
 
     </LinearLayout>
 
