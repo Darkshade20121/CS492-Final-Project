@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.riot.R
 
@@ -40,6 +41,7 @@ class PlayerListAdapter(private val players: List<String>, private val kills: Li
         }else if(teamColor[position] == "Blue" || teamColor[position] == "blue"){
             holder.playerTeam.background = ColorDrawable(Color.BLUE)
         }
+        holder.playerTeam.background.alpha = 120
     }
 
     override fun getItemCount() = players.size

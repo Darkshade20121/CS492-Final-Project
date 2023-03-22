@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.riot.R
@@ -49,6 +50,26 @@ class MatchDetailActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.red_score).text = matchData!!.teams.red.rounds_won.toString()
             findViewById<TextView>(R.id.blue_score).text = matchData!!.teams.blue.rounds_won.toString()
 
+            //Set background image
+            if(matchData!!.metadata.map == "Ascent"){
+                findViewById<ImageView>(R.id.backgroundImage).setImageResource(R.drawable.ascent_lg)
+            } else if (matchData!!.metadata.map == "Bind"){
+                findViewById<ImageView>(R.id.backgroundImage).setImageResource(R.drawable.bind_lg)
+            } else if (matchData!!.metadata.map == "Breeze"){
+                findViewById<ImageView>(R.id.backgroundImage).setImageResource(R.drawable.breeze_lg)
+            } else if (matchData!!.metadata.map == "Fracture"){
+                findViewById<ImageView>(R.id.backgroundImage).setImageResource(R.drawable.fracture_lg)
+            } else if (matchData!!.metadata.map == "Haven"){
+                findViewById<ImageView>(R.id.backgroundImage).setImageResource(R.drawable.haven_lg)
+            } else if (matchData!!.metadata.map == "Icebox"){
+                findViewById<ImageView>(R.id.backgroundImage).setImageResource(R.drawable.icebox_lg)
+            } else if (matchData!!.metadata.map == "Lotus"){
+                findViewById<ImageView>(R.id.backgroundImage).setImageResource(R.drawable.lotus_lg)
+            } else if (matchData!!.metadata.map == "Pearl"){
+                findViewById<ImageView>(R.id.backgroundImage).setImageResource(R.drawable.pearl_lg)
+            } else if (matchData!!.metadata.map == "Split"){
+                findViewById<ImageView>(R.id.backgroundImage).setImageResource(R.drawable.split_lg)
+            }
 
             // Set the number of kills
 
