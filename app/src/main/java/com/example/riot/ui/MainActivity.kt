@@ -102,6 +102,7 @@ class MainActivity : AppCompatActivity() {
         statsButton.setOnClickListener {
             val intent = Intent(this, StatsActivity::class.java)
             intent.putExtra("EXTRA_NAME", nameMain)
+
             intent.putExtra(EXTRA_MATCH, passedMatches as Serializable)
             if (::matchData.isInitialized) {
                 intent.putExtra(EXTRA_MATCH, matchData as Serializable)
