@@ -21,11 +21,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.lifecycle.Observer
 import com.example.riot.data.MatchData
 import java.io.Serializable
+import com.example.riot.data.Stats
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var riotApi: RiotApi
     private lateinit var riotAdapter: RiotAdapter
+    private lateinit var matchData: MatchData
+
 
     private lateinit var matchListAdapter: MatchListAdapter
     private lateinit var viewModel: MatchListViewModel
@@ -97,7 +100,9 @@ class MainActivity : AppCompatActivity() {
         statsButton.setOnClickListener {
             val intent = Intent(this, StatsActivity::class.java)
             intent.putExtra("EXTRA_NAME", nameMain)
-            intent.putExtra(EXTRA_MATCH, matchData as Serializable)
+            if (::matchData.isInitialized) {
+                intent.putExtra(EXTRA_MATCH, matchData as Serializable)
+            }
             startActivity(intent)
         }
 
