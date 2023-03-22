@@ -32,8 +32,8 @@ class PlayerListAdapter(private val players: List<String>, private val kills: Li
     override fun onBindViewHolder(holder: PlayerViewHolder, position: Int) {
         holder.playerName.text = players[position]
         holder.playerKills.text = "K: ${kills[position]}"
-        holder.playerDeaths.text = "D: ${deaths[position]}"
-        holder.playerAssists.text = "A: ${assists[position]}"
+        holder.playerDeaths.text = " D: ${deaths[position]}"
+        holder.playerAssists.text = " A: ${assists[position]}"
 
         if(teamColor[position] == "Red" || teamColor[position] == "red"){
             holder.playerTeam.background = ColorDrawable(Color.RED)

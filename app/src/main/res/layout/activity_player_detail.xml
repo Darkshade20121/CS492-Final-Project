@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF2121"
+    android:padding="@dimen/box_inset_layout_padding"
+    tools:context=".ui.MainActivity"
+    tools:deviceIds="wear">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_boxedEdges="all">
+
+        <!--Search view for filtering list view-->
+        <SearchView
+            android:id="@+id/idSV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:iconifiedByDefault="false"
+            android:padding="4dp"
+            android:queryHint="RIOT ID" />
+
+        <ImageView
+            android:id="@+id/pfp"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/user"
+            android:translationY="80dp" />
+
+        <TextView
+            android:id="@+id/riot_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:translationY="200dp" />
+
+        <TextView
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="______________________________________"
+            android:textAlignment="center"
+            android:textColor="#BABABA"
+            android:textSize="14sp"
+            android:translationY="222dp"
+            app:layout_constraintTop_toBottomOf="@+id/riot_id"/>
+
+        <TextView
+            android:id="@+id/player_statistics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Player Statistics"
+            android:textAlignment="center"
+            android:textColor="#BABABA"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:translationY="245dp"
+            app:layout_constraintTop_toBottomOf="@+id/riot_id"/>
+
+
+        <ImageView
+            android:id="@+id/riotLogoRelink"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:src="@mipmap/riot_games_icon_round" />
+
+        <ImageView
+            android:id="@+id/matchButton"
+            android:layout_width="31dp"
+            android:layout_height="28dp"
+            android:src="@drawable/history"
+            android:translationX="265dp"
+            android:translationY="155dp"
+            app:layout_constraintTop_toBottomOf="@id/pfp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Player Rank"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:translationY="300dp"
+            app:layout_constraintTop_toBottomOf="@+id/riot_id" />
+
+        <TextView
+            android:id="@+id/player_rank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Player Rank"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:translationY="320dp"
+            app:layout_constraintTop_toBottomOf="@+id/riot_id" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Average KDA"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:translationY="380dp"
+            app:layout_constraintTop_toBottomOf="@+id/riot_id" />
+
+        <TextView
+            android:id="@+id/player_kda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Average KDA"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:translationY="400dp"
+            app:layout_constraintTop_toBottomOf="@+id/riot_id" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Average Headshots"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:translationY="460dp"
+            app:layout_constraintTop_toBottomOf="@+id/riot_id" />
+
+        <TextView
+            android:id="@+id/player_headshot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Average Headshots"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:translationY="480dp"
+            app:layout_constraintTop_toBottomOf="@+id/riot_id" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Average Bodyshots"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:translationY="540dp"
+            app:layout_constraintTop_toBottomOf="@+id/riot_id" />
+
+        <TextView
+            android:id="@+id/player_bodyshot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Average Bodyshots"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:translationY="560dp"
+            app:layout_constraintTop_toBottomOf="@+id/riot_id" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Average Legshots"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:translationY="620dp"
+            app:layout_constraintTop_toBottomOf="@+id/riot_id" />
+
+        <TextView
+            android:id="@+id/player_legshot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Average Legshots"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:translationY="640dp"
+            app:layout_constraintTop_toBottomOf="@+id/riot_id" />
+
+    </RelativeLayout>
+</androidx.wear.widget.BoxInsetLayout>
