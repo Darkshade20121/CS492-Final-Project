@@ -66,11 +66,12 @@ class MatchDetailActivity : AppCompatActivity() {
 
 
             // Set the list of players
-            //val recyclerView: RecyclerView = findViewById(R.id.tv_red_team_players)
-            //recyclerView.layoutManager = LinearLayoutManager(this)
+            // Set up the RecyclerView with the custom adapter
+            val recyclerView: RecyclerView = findViewById(R.id.tv_players)
+            recyclerView.layoutManager = LinearLayoutManager(this)
 
-//            val adapter = PlayerListAdapter(players)
-//            recyclerView.adapter = adapter
+            val adapter = PlayerListAdapter(players, kills, deaths, assists, teamColor, blueScore, redScore)
+            recyclerView.adapter = adapter
 
 
         }
