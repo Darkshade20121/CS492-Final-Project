@@ -17,6 +17,8 @@ import android.provider.MediaStore
 import android.content.ContentValues
 import android.widget.Button
 import android.net.Uri
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import java.io.File
 import java.io.FileOutputStream
@@ -41,7 +43,14 @@ class StatsActivity : AppCompatActivity() {
             }
         } ?: emptyList()
 
-
+        val cardView = findViewById<RelativeLayout>(R.id.player_layout)
+        val captureButton = findViewById<ImageView>(R.id.saveButton)
+        captureButton.setOnClickListener {
+            val bitmap = getScreenShotFromView(cardView)
+            if (bitmap != null) {
+                saveMediaToStorage(bitmap)
+            }
+        }
 
         Log.d("FILTERED", filteredMatches.toString())
 
