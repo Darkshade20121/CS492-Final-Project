@@ -9,8 +9,21 @@ data class MatchResponse(
 
 data class MatchData(
     val metadata: MatchMetadata,
-    val players: Players
+    val players: Players,
+    val teams: Teams
 ) : Serializable
+
+data class Teams(
+    val red: Team,
+    val blue: Team
+) : Serializable
+
+data class Team(
+    val has_won: Boolean,
+    val rounds_won: Int,
+    val rounds_lost: Int
+) : Serializable
+
 
 data class MatchMetadata(
     val map: String,
@@ -138,5 +151,7 @@ data class MatchInfo(
     val players: List<String>,
     val kills: List<Int>,
     val deaths: List<Int>,
-    val team: List<String>
+    val team: List<String>,
+    val teams: Teams
 ) : Serializable
+

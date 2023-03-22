@@ -33,6 +33,7 @@ class MatchDetailActivity : AppCompatActivity() {
         if (intent != null && intent.hasExtra(EXTRA_MATCH)) {
             matchData = intent.getSerializableExtra(EXTRA_MATCH) as MatchData
 
+
             Log.d("This is the intent", intent.toString())
 
             // Set the map name
@@ -46,14 +47,23 @@ class MatchDetailActivity : AppCompatActivity() {
            // findViewById<TextView>(R.id.tv_match_deaths).text = "Deaths: ${matchData!!.info.deaths}"
 
             // Create a list of player names and their KDA
+            val teamColor = mutableListOf<String>()
             val players = mutableListOf<String>()
-            val kills = mutableListOf<String>()
-            val deaths = mutableListOf<String>()
+            val kills = mutableListOf<Int>()
+            val deaths = mutableListOf<Int>()
+            val assists = mutableListOf<Int>()
+            val blueScore = matchData!!.teams.blue.rounds_won
+            val redScore = matchData!!.teams.red.rounds_won
+
             for (player in matchData!!.players.all_players) {
-                players.add("${player.name} - KDA: ${player.stats.kills}/${player.stats.deaths}/${player.stats.assists}")
+//                players.add("${player.name} - KDA: ${player.stats.kills}/${player.stats.deaths}/${player.stats.assists}")
+                teamColor.add(player.team)
+                players.add(player.name)
+                kills.add(player.stats.kills)
+                deaths.add(player.stats.deaths)
+                assists.add(player.stats.assists)
             }
 
-            Log.d("Players In MatchDetailActivity", players.toString())
 
             // Set the list of players
             //val recyclerView: RecyclerView = findViewById(R.id.tv_red_team_players)
