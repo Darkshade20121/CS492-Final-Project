@@ -7,6 +7,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.riot.R
 import com.example.riot.data.MatchData
+import android.view.View
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.widget.Toast
+import android.os.Build
+import android.os.Environment
+import android.provider.MediaStore
+import android.content.ContentValues
+import android.widget.Button
+import android.net.Uri
+import android.widget.RelativeLayout
+import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
 
 class StatsActivity : AppCompatActivity() {
 
@@ -27,7 +41,7 @@ class StatsActivity : AppCompatActivity() {
             }
         } ?: emptyList()
 
-        
+
 
         Log.d("FILTERED", filteredMatches.toString())
 
@@ -36,5 +50,43 @@ class StatsActivity : AppCompatActivity() {
 //        statsAdapter = StatsAdapter(filteredMatches)
 //        recyclerView.adapter = statsAdapter
 //        recyclerView.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun getScreenShotFromView(v: View): Bitmap? {
+        var screenshot: Bitmap? = null
+        try {
+            screenshot = Bitmap.createBitmap(v.measuredWidth, v.measuredHeight, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(screenshot)
+            v.draw(canvas)
+        } catch (e: Exception) {
+            Log.e("GFG", "Failed to capture screenshot because:" + e.message)
+        }
+        return screenshot
+    }
+
+    private fun saveMediaToStorage(bitmap: Bitmap) {
+        val filename = "${System.currentTimeMillis()}.jpg"
+        var fos: OutputStream? = null
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            this.contentResolver?.also { resolver ->
+                val contentValues = ContentValues().apply {
+                    put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
+                    put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
+                    put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+                }
+                val imageUri: Uri? = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+                fos = imageUri?.let { resolver.openOutputStream(it) }
+            }
+        } else {
+            val imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+            val image = File(imagesDir, filename)
+            fos = FileOutputStream(image)
+        }
+
+        fos?.use {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
+            Toast.makeText(this , "Captured View and saved to Gallery" , Toast.LENGTH_SHORT).show()
+        }
     }
 }
