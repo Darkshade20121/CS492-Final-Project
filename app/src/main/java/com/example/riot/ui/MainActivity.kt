@@ -19,9 +19,10 @@ import kotlinx.coroutines.withContext
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.riot.data.MatchData
 import java.io.Serializable
-import com.example.riot.data.Stats
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,10 +34,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var matchListAdapter: MatchListAdapter
     private lateinit var viewModel: MatchListViewModel
 
-    private lateinit var statsAdapter: StatsAdapter
+    //private lateinit var statsAdapter: StatsAdapter
 
-    private var nameMain: String? = null
+    private var nameMain: String? = ""
     private var passedMatches: List<MatchData> = emptyList()
+
+    val profilePictureLink = ""
 
 
 
@@ -59,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.matchList.observe(this, Observer { matchList ->
             matchListAdapter.updateMatchList(matchList)
             passedMatches = matchList
+            //matchListAdapter.getProfileLink(matchList, nameMain!!)
         })
 
         val profilePic: ImageView = findViewById(R.id.pfp)
@@ -67,6 +71,10 @@ class MainActivity : AppCompatActivity() {
         val recentlyPlayed: TextView = findViewById(R.id.recently_played)
         val riotTD: TextView = findViewById(R.id.riot_id)
         val searchView = findViewById<SearchView>(R.id.idSV)
+
+//        val profilePictureView = findViewById<ImageView>(R.id.pfp)
+
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 var searchQuery = query
@@ -80,12 +88,22 @@ class MainActivity : AppCompatActivity() {
                 line.visibility = View.VISIBLE
                 recentlyPlayed.visibility = View.VISIBLE
 
+
                 GlobalScope.launch(Dispatchers.Main) {
                     nameMain = searchQuery.split("#")[0]
                     try {
                         val matches = withContext(Dispatchers.IO) {
                             viewModel.updateMatchList(searchQuery.split("#")[0], searchQuery.split("#")[1])
                         }
+
+                        // Update Profile Picture
+                        val playerImage: ImageView = findViewById(R.id.pfp)
+                        Glide.with(this@MainActivity)
+                            .load(profilePictureLink)
+                            .centerCrop()
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .into(playerImage)
+
                         Log.d("MainActivity", "Match history: $matches")
                     } catch (e: Exception) {
                         Log.e("MainActivity", "Error getting match history: ${e.message}", e)
@@ -125,16 +143,6 @@ class MainActivity : AppCompatActivity() {
         // Create an intent to launch the MatchDetailsActivity
         val intent = Intent(this, MatchDetailActivity::class.java)
         intent.putExtra(EXTRA_MATCH, matchData as Serializable)
-        startActivity(intent)
-    }
-    private fun onStatsClick(matchData: MatchData, nameMain: String) {
-        // Handle click on stats button
-        Log.d("MainActivity", "Stats clicked: $matchData, $nameMain")
-
-        // Create an intent to launch the StatsActivity
-        val intent = Intent(this, StatsActivity::class.java)
-        intent.putExtra(EXTRA_MATCH, matchData as Serializable)
-        intent.putExtra("EXTRA_NAME", nameMain)
         startActivity(intent)
     }
 }

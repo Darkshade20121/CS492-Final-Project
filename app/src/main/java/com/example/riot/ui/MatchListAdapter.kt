@@ -1,16 +1,16 @@
 package com.example.riot.ui
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.riot.R
 import com.example.riot.data.MatchData
 
 class MatchListAdapter(
-    private val onMatchClick: (MatchData) -> Unit
+    private val onMatchClick: (MatchData) -> Unit,
 ) : RecyclerView.Adapter<MatchListAdapter.MatchViewHolder>() {
     private var matchList = listOf<MatchData>()
 
@@ -18,6 +18,16 @@ class MatchListAdapter(
     fun updateMatchList(newMatchList: List<MatchData>?) {
         matchList = newMatchList ?: listOf()
         notifyDataSetChanged()
+    }
+
+    fun getProfileLink(newMatchList: List<MatchData>?, nameMain: String): String {
+        // Get Player card link and set pfp to it
+        newMatchList?.get(0)?.players?.all_players?.forEach { player ->
+            if (player.name.equals(nameMain, ignoreCase = true)) {
+                return player.assets.card.small
+            }
+        }
+        return ""
     }
 
     override fun getItemCount() = matchList.size
@@ -45,6 +55,7 @@ class MatchListAdapter(
             }
         }
         fun bind(matchRepo: MatchData) {
+
             currentMatch = matchRepo
             nameTV.text = matchRepo.metadata.map
             if(nameTV.text == "Ascent"){

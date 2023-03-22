@@ -16,16 +16,19 @@ import android.content.ContentValues
 import android.net.Uri
 import android.widget.ImageView
 import android.widget.RelativeLayout
+import android.widget.TextView
+
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 import com.example.riot.data.Player
 
 
-class StatsActivity : AppCompatActivity() {
 
-    private lateinit var statsAdapter: StatsAdapter
+class StatsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +50,34 @@ class StatsActivity : AppCompatActivity() {
             }
         }
 
+        val numPlayers = filteredPlayers.size
+        var totalKills = 0.0F
+        var totalAssists = 0.0F
+        var totalDeaths = 0.0F
+        var totalHeadshots = 0.0F
+        var totalBodyshots = 0.0F
+        var totalLegshots = 0.0F
+        var playerRank = ""
+        var imageUrl = ""
+
+        filteredPlayers.forEach { player ->
+            totalKills += player.stats.kills
+            totalAssists += player.stats.assists
+            totalDeaths += player.stats.deaths
+            totalHeadshots += player.stats.headshots
+            totalBodyshots += player.stats.bodyshots
+            totalLegshots += player.stats.legshots
+            if(player.currenttier_patched != "Unrated"){
+                playerRank = player.currenttier_patched
+            }
+            imageUrl = player.assets.card.small
+        }
+
+        val kdaAverage = ((totalKills + totalAssists) / totalDeaths).toDouble()
+        val headshotsAverage = (totalHeadshots / numPlayers).toDouble()
+        val bodyshotsAverage = (totalBodyshots / numPlayers).toDouble()
+        val legshotsAverage = (totalLegshots / numPlayers).toDouble()
+
         val cardView = findViewById<RelativeLayout>(R.id.player_layout)
         val captureButton = findViewById<ImageView>(R.id.saveButton)
         captureButton.setOnClickListener {
@@ -59,10 +90,30 @@ class StatsActivity : AppCompatActivity() {
 
 
 
-//        val recyclerView: RecyclerView = findViewById(R.id.stats_list)
-//        statsAdapter = StatsAdapter(filteredMatches)
-//        recyclerView.adapter = statsAdapter
-//        recyclerView.layoutManager = LinearLayoutManager(this)
+        val relativeLayout: RelativeLayout = findViewById(R.id.player_layout)
+
+        val playerImage: ImageView = relativeLayout.findViewById(R.id.pfp)
+        Glide.with(this)
+            .load(imageUrl)
+            .centerCrop()
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(playerImage)
+
+        val kdaTextView: TextView = relativeLayout.findViewById(R.id.player_kda)
+        val headshotsTextView: TextView = relativeLayout.findViewById(R.id.player_headshot)
+        val bodyshotsTextView: TextView = relativeLayout.findViewById(R.id.player_bodyshot)
+        val legshotsTextView: TextView = relativeLayout.findViewById(R.id.player_legshot)
+        val rankTextView: TextView = relativeLayout.findViewById(R.id.player_rank)
+
+        kdaTextView.text = String.format("%.2f", kdaAverage)
+        headshotsTextView.text = String.format("%.2f", headshotsAverage)
+        bodyshotsTextView.text = String.format("%.2f", bodyshotsAverage)
+        legshotsTextView.text = String.format("%.2f", legshotsAverage)
+        rankTextView.text = playerRank
+
+
+
+
     }
 
     private fun getScreenShotFromView(v: View): Bitmap? {
