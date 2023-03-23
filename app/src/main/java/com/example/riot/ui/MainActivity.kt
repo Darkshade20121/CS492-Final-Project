@@ -1,5 +1,6 @@
 package com.example.riot.ui
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -100,6 +101,13 @@ class MainActivity : AppCompatActivity() {
             if (searchQuery == "a" || searchQuery == "A") {
 //                searchQuery = "vasuleronesdevlo#69696"
                 searchQuery = "keneral genobi#00000"
+                // Random Names to Search Up
+                // vasuleronesdevlo#69696
+                // keneral genobi#00000
+                // Renoran of Siege#na1
+                // DAM 4#four
+                // curry#66666
+                // Neon#HARD
             }
             riotTD.text = searchQuery
 
@@ -128,6 +136,11 @@ class MainActivity : AppCompatActivity() {
         // If done from home page
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
+
+                // Create a SharedPreferences instance
+                val sharedPreferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE)
+                // Save the query string to SharedPreferences
+                sharedPreferences.edit().putString("LAST_QUERY", query).apply()
 
                 searchView.clearFocus()
                 loadingIndicator.visibility = View.VISIBLE
